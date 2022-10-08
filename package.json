@@ -18,12 +18,17 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup --dts --minify"
+    "build": "tsup --dts --minify",
+    "changeset": "changeset",
+    "bump-version": "changeset version",
+    "release": "pnpm run build && changeset publish"
   },
   "peerDependencies": {
     "typescript": ">=3.3.1"
   },
   "devDependencies": {
+    "@changesets/changelog-github": "^0.4.7",
+    "@changesets/cli": "^2.25.0",
     "@types/jest": "^29.1.2",
     "jest": "^29.1.2",
     "tsup": "^6.2.3",
