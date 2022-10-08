@@ -6,11 +6,11 @@ const matcherResult = (message: string): jest.CustomMatcherResult => ({
 });
 
 const customMathers: jest.ExpectExtendMap = {
-  toHaveType(received: unknown) {
-    return matcherResult(`${received} does not match the expected types`);
+  toHaveType(_received: unknown) {
+    return matcherResult('received value does not match the expected type');
   },
-  toNotHaveType(received: unknown) {
-    return matcherResult(`${received} matches the expected types`);
+  toNotHaveType(_received: unknown) {
+    return matcherResult('received value matches the expected type');
   },
 };
 
