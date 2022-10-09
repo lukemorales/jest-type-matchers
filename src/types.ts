@@ -12,14 +12,14 @@ export interface TypeMatchers<R, X> {
    * @example
    * expect(true).toHaveType<boolean>()
    */
-  toHaveType<Y extends Equal<X, Y> extends true ? X : never>(): R;
+  toHaveType<Y extends Alike<X, Y> extends true ? X : never>(): R;
   /**
    * Assert that the received variable does not have the expected type.
    *
    * @example
    * expect('hello world').toNotHaveType<number>()
    */
-  toNotHaveType<Y extends NotEqual<X, Y> extends true ? any : never>(): R;
+  toNotHaveType<Y extends Unlike<X, Y> extends true ? any : never>(): R;
 }
 
 /**
@@ -30,3 +30,8 @@ export interface TypeMatchers<R, X> {
 
 type Equal<X, Y> = (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y ? 1 : 2 ? true : false;
 type NotEqual<X, Y> = true extends Equal<X, Y> ? false : true;
+
+type MergeInsertions<T> = T extends object ? { [K in keyof T]: MergeInsertions<T[K]> } : T;
+
+type Alike<X, Y> = Equal<MergeInsertions<X>, Y>;
+type Unlike<X, Y> = NotEqual<MergeInsertions<X>, Y>;
