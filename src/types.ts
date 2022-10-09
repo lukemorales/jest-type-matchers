@@ -20,6 +20,20 @@ export interface TypeMatchers<R, X> {
    * expect('hello world').toNotHaveType<number>()
    */
   toNotHaveType<Y extends Unlike<X, Y> extends true ? any : never>(): R;
+  /**
+   * Assert that the received variable is strictly equal to the expected type.
+   *
+   * @example
+   * expect(true).toHaveStrictType<boolean>()
+   */
+  toHaveStrictType<Y extends Equal<X, Y> extends true ? X : never>(): R;
+  /**
+   * Assert that the received variable is not strictly equal to the expected type.
+   *
+   * @example
+   * expect('hello world').toNotHaveStrictType<number>()
+   */
+  toNotHaveStrictType<Y extends NotEqual<X, Y> extends true ? any : never>(): R;
 }
 
 /**
