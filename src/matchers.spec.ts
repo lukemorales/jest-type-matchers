@@ -19,6 +19,12 @@ describe('toHaveType', () => {
     expect({ ok: true }).toHaveType<{ ok: boolean }>();
     expect({ ok: true } as const).toHaveType<{ readonly ok: true }>();
 
+    type Result = { ok: boolean } & { resolved: boolean };
+    expect<Result>({ ok: false, resolved: true }).toHaveType<{
+      ok: boolean;
+      resolved: boolean;
+    }>();
+
     // unhappy path
     // @ts-expect-error
     expect(true).toHaveType<unknown>();
@@ -38,13 +44,6 @@ describe('toHaveType', () => {
     expect({ ok: true }).toHaveType<{ ok: true }>();
     // @ts-expect-error
     expect({ ok: true } as const).toHaveType<{ ok: boolean }>();
-
-    // strictness
-    const target = { ok: false, resolved: true } as { ok: boolean } & { resolved: boolean };
-
-    expect(target).toHaveType<{ ok: boolean; resolved: boolean }>();
-    // @ts-expect-error
-    expect(target).toHaveType<{ ok: boolean } & { resolved: boolean }>();
   });
 });
 
@@ -61,6 +60,12 @@ describe('toNotHaveType', () => {
 
     expect({ ok: true as const }).toNotHaveType<{ ok: false }>();
     expect({ ok: true } as const).toNotHaveType<{ ok: true }>();
+
+    type Result = { ok: boolean } & { resolved: boolean };
+    expect<Result>({ ok: false, resolved: true }).toNotHaveType<{
+      ok: false;
+      resolved: true;
+    }>();
 
     // unhappy path
     // @ts-expect-error
@@ -81,13 +86,6 @@ describe('toNotHaveType', () => {
     expect({ ok: true as const }).toNotHaveType<{ ok: true }>();
     // @ts-expect-error
     expect({ ok: true } as const).toNotHaveType<{ readonly ok: true }>();
-
-    // strictness
-    const target = { ok: false, resolved: true } as { ok: boolean } & { resolved: boolean };
-
-    expect(target).toNotHaveType<{ ok: false; resolved: true }>();
-    // @ts-expect-error
-    expect(target).toNotHaveType<{ ok: boolean; resolved: boolean }>();
   });
 });
 
@@ -126,11 +124,14 @@ describe('toHaveStrictType', () => {
     expect({ ok: true } as const).toHaveStrictType<{ ok: boolean }>();
 
     // strictness
-    const target = { ok: false, resolved: true } as { ok: boolean } & { resolved: boolean };
+    type Result = { ok: boolean } & { resolved: boolean };
 
-    expect(target).toHaveStrictType<{ ok: boolean } & { resolved: boolean }>();
+    expect<Result>({ ok: false, resolved: true }).toHaveStrictType<{ ok: boolean } & { resolved: boolean }>();
     // @ts-expect-error
-    expect(target).toHaveStrictType<{ ok: boolean; resolved: boolean }>();
+    expect<Result>({ ok: false, resolved: true }).toHaveStrictType<{
+      ok: boolean;
+      resolved: boolean;
+    }>();
   });
 });
 
@@ -169,10 +170,13 @@ describe('toNotHaveStrictType', () => {
     expect({ ok: true } as const).toNotHaveStrictType<{ readonly ok: true }>();
 
     // strictness
-    const target = { ok: false, resolved: true } as { ok: boolean } & { resolved: boolean };
+    type Result = { ok: boolean } & { resolved: boolean };
 
-    expect(target).toNotHaveStrictType<{ ok: false; resolved: true }>();
+    expect<Result>({ ok: false, resolved: true }).toNotHaveStrictType<{
+      ok: false;
+      resolved: true;
+    }>();
     // @ts-expect-error
-    expect(target).toNotHaveStrictType<{ ok: boolean } & { resolved: boolean }>();
+    expect<Result>({ ok: false, resolved: true }).toNotHaveStrictType<{ ok: boolean } & { resolved: boolean }>();
   });
 });

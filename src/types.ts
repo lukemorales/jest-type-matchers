@@ -59,5 +59,5 @@ type NotEqual<Left, Right> = true extends Equal<Left, Right> ? false : true;
 
 type MergeInsertions<T> = T extends object ? { [K in keyof T]: MergeInsertions<T[K]> } : T;
 
-type Alike<Left, Right> = Equal<MergeInsertions<Left>, Right>;
-type Unlike<Left, Right> = NotEqual<MergeInsertions<Left>, Right>;
+type Alike<Left, Right> = Equal<MergeInsertions<Left>, MergeInsertions<Right>>;
+type Unlike<Left, Right> = NotEqual<MergeInsertions<Left>, MergeInsertions<Right>>;
