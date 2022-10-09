@@ -49,6 +49,11 @@ These custom matchers allow you to just check your types. This means that they w
 #### `toHaveType`
 ```ts
 expect(true).toHaveType<boolean>();
+
+type Result = { ok: boolean } & { data: null };
+
+const res: Result = { ok: true, data: null };
+expect(res).toHaveType<{ ok: boolean; data: null }>();
 ```
 This allows you to check that a variable has an expected type.
 
@@ -57,3 +62,20 @@ This allows you to check that a variable has an expected type.
 expect('hello world').toNotHaveType<number>();
 ```
 This allows you to check that a variable does not have a specific type.
+
+#### `toHaveStrictType`
+```ts
+expect(true).toHaveStrictType<boolean>();
+
+type Result = { ok: boolean } & { data: null };
+
+const res: Result = { ok: true, data: null };
+expect(res).toHaveStrictType<{ ok: boolean } & { data: null }>();
+```
+This allows you to check that a variable is strict equal to an expected type.
+
+#### `toNotHaveStrictType`
+```ts
+expect('hello world').toNotHaveStrictType<number>();
+```
+This allows you to check that a variable is not strict equal to a specific type.

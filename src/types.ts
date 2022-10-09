@@ -10,40 +10,40 @@ export interface TypeMatchers<Void, Left> {
    * Assert that the received variable has the expected type.
    *
    * @example
-   * expect(true).toHaveType<boolean>()
+   * expect(true).toHaveType<boolean>();
    *
    * @example
    * type Result = { ok: boolean } & { data: null };
    *
    * const res: Result = { ok: true, data: null };
-   * expect(res).toHaveType<{ ok: boolean; data: null }>()
+   * expect(res).toHaveType<{ ok: boolean; data: null }>();
    */
   toHaveType<Right extends Alike<Left, Right> extends true ? Left : never>(): Void;
   /**
    * Assert that the received variable does not have the expected type.
    *
    * @example
-   * expect('hello world').toNotHaveType<number>()
+   * expect('hello world').toNotHaveType<number>();
    */
   toNotHaveType<Right extends Unlike<Left, Right> extends true ? any : never>(): Void;
   /**
    * Assert that the received variable is strictly equal to the expected type.
    *
    * @example
-   * expect(true).toHaveStrictType<boolean>()
+   * expect(true).toHaveStrictType<boolean>();
    *
    * @example
    * type Result = { ok: boolean } & { data: null };
    *
    * const res: Result = { ok: true, data: null };
-   * expect(res).toHaveStrictType<{ ok: boolean } & { data: null }>()
+   * expect(res).toHaveStrictType<{ ok: boolean } & { data: null }>();
    */
   toHaveStrictType<Right extends Equal<Left, Right> extends true ? Left : never>(): Void;
   /**
    * Assert that the received variable is not strictly equal to the expected type.
    *
    * @example
-   * expect('hello world').toNotHaveStrictType<number>()
+   * expect('hello world').toNotHaveStrictType<number>();
    */
   toNotHaveStrictType<Right extends NotEqual<Left, Right> extends true ? any : never>(): Void;
 }
