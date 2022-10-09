@@ -1,6 +1,6 @@
 {
   "name": "@lukemorales/jest-type-matchers",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": "Luke Morales <lukemorales@live.com>",
   "description": "Custom jest matchers to test the state of your types",
   "license": "MIT",

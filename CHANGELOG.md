@@ -1,5 +1,11 @@
 # @lukemorales/jest-type-matchers
 
+## 0.2.1
+
+### Patch Changes
+
+- Fix `toHaveType` breaking when object has methods
+
 ## 0.2.0
 
 ### Minor Changes
