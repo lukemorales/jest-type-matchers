@@ -1,5 +1,6 @@
 import { TypeMatchers } from './types';
 
+/* istanbul ignore next */
 const matcherResult = (errorMessage: string): jest.CustomMatcherResult => ({
   pass: true,
   message: () => errorMessage,
