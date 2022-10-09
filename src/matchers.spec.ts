@@ -40,7 +40,7 @@ describe('toHaveType', () => {
     expect({ ok: true } as const).toHaveType<{ ok: boolean }>();
 
     // strictness
-    const target = { ok: true, resolved: false } as { ok: boolean } & { resolved: boolean };
+    const target = { ok: false, resolved: true } as { ok: boolean } & { resolved: boolean };
 
     expect(target).toHaveType<{ ok: boolean; resolved: boolean }>();
     // @ts-expect-error
@@ -83,9 +83,9 @@ describe('toNotHaveType', () => {
     expect({ ok: true } as const).toNotHaveType<{ readonly ok: true }>();
 
     // strictness
-    const target = { ok: true, resolved: false } as { ok: boolean } & { resolved: boolean };
+    const target = { ok: false, resolved: true } as { ok: boolean } & { resolved: boolean };
 
-    expect(target).toNotHaveType<{ ok: true; resolved: false }>();
+    expect(target).toNotHaveType<{ ok: false; resolved: true }>();
     // @ts-expect-error
     expect(target).toNotHaveType<{ ok: boolean; resolved: boolean }>();
   });
@@ -126,7 +126,7 @@ describe('toHaveStrictType', () => {
     expect({ ok: true } as const).toHaveStrictType<{ ok: boolean }>();
 
     // strictness
-    const target = { ok: true, resolved: false } as { ok: boolean } & { resolved: boolean };
+    const target = { ok: false, resolved: true } as { ok: boolean } & { resolved: boolean };
 
     expect(target).toHaveStrictType<{ ok: boolean } & { resolved: boolean }>();
     // @ts-expect-error
@@ -169,9 +169,9 @@ describe('toNotHaveStrictType', () => {
     expect({ ok: true } as const).toNotHaveStrictType<{ readonly ok: true }>();
 
     // strictness
-    const target = { ok: true, resolved: false } as { ok: boolean } & { resolved: boolean };
+    const target = { ok: false, resolved: true } as { ok: boolean } & { resolved: boolean };
 
-    expect(target).toNotHaveStrictType<{ ok: true; resolved: false }>();
+    expect(target).toNotHaveStrictType<{ ok: false; resolved: true }>();
     // @ts-expect-error
     expect(target).toNotHaveStrictType<{ ok: boolean } & { resolved: boolean }>();
   });

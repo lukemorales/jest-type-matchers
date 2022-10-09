@@ -11,6 +11,12 @@ export interface TypeMatchers<Void, Left> {
    *
    * @example
    * expect(true).toHaveType<boolean>()
+   *
+   * @example
+   * type Result = { ok: boolean } & { data: null };
+   *
+   * const res: Result = { ok: true, data: null };
+   * expect(res).toHaveType<{ ok: boolean; data: null }>()
    */
   toHaveType<Right extends Alike<Left, Right> extends true ? Left : never>(): Void;
   /**
@@ -25,6 +31,12 @@ export interface TypeMatchers<Void, Left> {
    *
    * @example
    * expect(true).toHaveStrictType<boolean>()
+   *
+   * @example
+   * type Result = { ok: boolean } & { data: null };
+   *
+   * const res: Result = { ok: true, data: null };
+   * expect(res).toHaveStrictType<{ ok: boolean } & { data: null }>()
    */
   toHaveStrictType<Right extends Equal<Left, Right> extends true ? Left : never>(): Void;
   /**
