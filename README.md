@@ -52,8 +52,7 @@ expect(true).toHaveType<boolean>();
 
 type Result = { ok: boolean } & { data: null };
 
-const res: Result = { ok: true, data: null };
-expect(res).toHaveType<{ ok: boolean; data: null }>();
+expect<Result>({ ok: true, data: null }).toHaveType<{ ok: boolean; data: null }>();
 ```
 This allows you to check that a variable has an expected type.
 
@@ -69,8 +68,7 @@ expect(true).toHaveStrictType<boolean>();
 
 type Result = { ok: boolean } & { data: null };
 
-const res: Result = { ok: true, data: null };
-expect(res).toHaveStrictType<{ ok: boolean } & { data: null }>();
+expect<Result>({ ok: true, data: null }).toHaveStrictType<{ ok: boolean } & { data: null }>();
 ```
 This allows you to check that a variable is strict equal to an expected type.
 
