@@ -20,16 +20,16 @@
   "scripts": {
     "build": "tsup --dts --minify",
     "changeset": "changeset",
-    "bump-version": "changeset version",
+    "dev": "pnpm run test --watch",
     "lint": "run-p lint:*",
     "lint:eslint": "eslint src --ext .ts",
     "lint:eslint:fix": "pnpm run lint:eslint --fix",
     "lint:prettier": "prettier --check \"src/**/*.ts\"",
     "lint:prettier:fix": "pnpm run lint:prettier --write",
     "lint:tsc": "tsc --project tsconfig.json --noEmit",
-    "release": "pnpm run build && changeset publish",
+    "prerelease": "run-p build test:ci",
+    "release": "changeset publish",
     "test": "jest --passWithNoTests --colors",
-    "test:watch": "pnpm run test --watch",
     "test:ci": "pnpm run test --ci --bail"
   },
   "lint-staged": {
